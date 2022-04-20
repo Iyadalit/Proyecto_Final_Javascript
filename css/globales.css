@@ -1,5 +1,6 @@
 .contenedor-principal{
     position: absolute;
+    width: 100%;
 }
 
 .loader-contenedor{
