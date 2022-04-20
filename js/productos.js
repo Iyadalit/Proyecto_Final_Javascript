@@ -62,6 +62,7 @@ function handleImageSelect(event) {
 
 async function obtenerProductos() {
   try {
+    cambiarEstadoLoader(true)
     const response = await obtenerProductosRequest();
     const responseData = await response.json();
     if (!response.ok) {
@@ -75,6 +76,8 @@ async function obtenerProductos() {
       error
     );
     showToast("error", `${error}`, 3600);
+  } finally{
+    cambiarEstadoLoader(false)
   }
 }
 
@@ -173,6 +176,7 @@ function confirmacionEliminarProducto(productoId) {
 
 async function eliminarProducto(productoId) {
   try {
+    cambiarEstadoLoader(true)
     let response = await eliminarProductoRequest(productoId);
     if (!response.ok) {
       throw Error(response.statusText);
@@ -191,6 +195,8 @@ async function eliminarProducto(productoId) {
       error
     );
     showToast("error", `${error}`, 3600);
+  } finally{
+    cambiarEstadoLoader(false)
   }
 }
 
@@ -210,6 +216,7 @@ function handleAddProduct(event) {
 
 async function registrarProducto(name, quantity, purchasePrice, salePrice) {
   try {
+    cambiarEstadoLoader(true)
     let response = await agregarProductoRequest(
       name,
       quantity,
@@ -232,11 +239,14 @@ async function registrarProducto(name, quantity, purchasePrice, salePrice) {
       error
     );
     showToast("error", `${error}`, 3600);
+  }finally{
+    cambiarEstadoLoader(false)
   }
 }
 
 async function editarProducto(name, quantity, purchasePrice, salePrice) {
   try {
+    cambiarEstadoLoader(true)
     let response = await editarProductoRequest(
       name,
       quantity,
@@ -270,6 +280,8 @@ async function editarProducto(name, quantity, purchasePrice, salePrice) {
       error
     );
     showToast("error", `${error}`, 3600);
+  }finally{
+    cambiarEstadoLoader(false)
   }
 }
 

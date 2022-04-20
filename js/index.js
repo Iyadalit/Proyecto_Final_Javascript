@@ -29,9 +29,8 @@ function revisarSesion() {
 
 async function handleLogin(event) {
   event.preventDefault();
-  console.log("🚀 ~ file: index.js ~ line 10 ~ handleLogin ~ event", event);
-
   try {
+    cambiarEstadoLoader(true)
     let response = await login(emailInput.value, passwordInput.value);
     let responseData = await response.json();
     if (!response.ok) {
@@ -48,5 +47,7 @@ async function handleLogin(event) {
   } catch (error) {
     showToast("error", `${error}`, 3600);
     console.log("🚀 ~ file: index.js ~ line 16 ~ handleLogin ~ error", error);
+  } finally{
+    cambiarEstadoLoader(false)
   }
 }
